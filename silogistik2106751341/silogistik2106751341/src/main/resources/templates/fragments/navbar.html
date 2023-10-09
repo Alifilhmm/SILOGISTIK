@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <object th:insert="~{fragments/common :: js}" th:remove="tag"></object>
+    <object th:insert="~{fragments/common :: css}" th:remove="tag"></object>
+    <script th:src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body>
+    <nav th:fragment="navbar(currentPage)" class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand fw-bold text-light ms-3" href="/">SILOGISTIK</a>
+        <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown" th:class="${currentPage == 'gudang'} ? 'active fw-bold' : ''">
+                    <a class="nav-link dropdown-toggle text-light" role="button"
+                        data-toggle="dropdown" data-bs-target="#gudangDropdown" aria-haspopup="true" aria-expanded="false">
+                        Gudang
+                    </a>    
+                    <ul class="dropdown-menu" id="gudangDropdown">
+                        <li><a class="dropdown-item" th:href="@{/gudang}">Daftar Gudang</a></li>
+                        <li><a class="dropdown-item" th:href="@{/gudang/cari-barang}">Cari Barang</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" th:class="${currentPage == 'barang'} ? 'active fw-bold' : ''">
+                  <a class="nav-link" th:href="@{/barang}" style="color: white;">Barang</a>
+                </li>
+                <li class="nav-item" th:class="${currentPage == 'request'} ? 'active fw-bold' : ''">
+                    <a class="nav-link" th:href="@{/permintaan-pengiriman}" style="color: white;">Permintaan Pengiriman</a>
+                </li>
+                <li class="nav-item" th:class="${currentPage == 'home' ? 'active fw-bold' : 'nav-item'}">
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+
+</html>

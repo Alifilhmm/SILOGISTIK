@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  <title>Form Add Barang</title>
+</head>
+
+<body>
+  <nav th:replace="~{fragments/navbar :: navbar('barang')}"></nav>
+  <div class="container">
+    <div class="card m-4 p-4">
+      <div class="card-header text-center">
+            <h1 style="font-size: 30px; font-weight: bold;">Tambah Barang</h1>
+      </div>
+      <div class="card-body">
+        <div class="justify-content-center">
+          <br>
+          <form th:action="@{/barang/tambah}" th:object="${barangDTO}" method="POST">
+            Merk Barang: <br>
+            <input class="form-control" type="text" th:field="*{merk}" />
+            <br><br>
+            
+            Tipe Barang: <br>
+            <select class="form-control" type="number" th:field="*{tipe_barang}">
+            <option value="1">Produk Elektronik</option>
+            <option value="2">Pakaian & Aksesoris</option>
+            <option value="3">Makanan & Minuman</option>
+            <option value="4">Kosmetik</option>
+            <option value="5">Perlengkapan Rumah</option>
+            </select>
+            <br><br>
+
+            Harga: <br>
+            <input required class="form-control" type="number" th:field="*{harga}" />
+            <br><br>
+
+            <button class="btn btn-primary" type="submit">Simpan</button>
+            <a class="btn btn-danger" href="/barang">Batal</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  <title>Cari Gudang</title>
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar(gudang)}"></nav>
+    <div class="container mt-5">
+        <div class="container text-center">
+            <h1>Cari Gudang</h1>
+            <br>
+            <br>
+        </div>
+        <form th:action="@{/gudang/cari-barang}" method="get">
+            <div class="input-group">
+                <select class="form-control" name="sku" th:value="${sku}">
+                    <option th:each="barang, barangItr: ${listBarang}" th:value="${barang.sku}" th:text="${barang.merk}"></option>
+                </select>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </div>
+        </form>
+        <br><br>
+        <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="gudang, gudangItr: ${listGudang}">
+                    <th scope="row" th:text="${gudangItr.count}">1</th>
+                    <td th:text="${gudang.nama}"></td>
+                    <td th:text="${gudang.alamat_gudang}"></td>
+                    <td><a class= "btn btn-secondary" th:href="@{/gudang/{id}(id=${gudang.idGudang})}">Detail</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</body>
+</html>

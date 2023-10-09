@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  <title>Daftar Barang</title>
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar(barang)}"></nav>
+    <div class="container mt-5">
+        <div class="container text-center">
+            <h1>Daftar Barang</h1>
+            <a type="button" class="btn btn-md btn-primary" th:href="@{/barang/tambah}">+ Tambah Barang</a>
+            <br>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Merk</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="barang, barangItr: ${listBarang}">
+                <th scope="row" th:text="${barangItr.count}">1</th>
+                <td th:text="${barang.sku}"></td>
+                <td th:text="${barang.merk}"></td>
+                <td th:text="${barang.stok}"></td>
+                <td th:text="${barang.harga}"></td>
+                <td><a class= "btn btn-secondary" th:href="@{/barang/{idBarang}(idBarang=${barang.sku})}">Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  <title>Detail Barang</title>
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar(barang)}"></nav>
+    <div class="container mt-5">
+        <div class="container text-left">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 style="font-size: 24px; font-weight: bold;">Detail Barang</h1>
+                    <a class= "btn btn-secondary" th:href="@{/barang/{idBarang}/ubah(idBarang=${barang.sku})}">Ubah</a>
+                </div>
+                <div class="card-body">
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Merk :</span>
+                        <span th:text="${barang.merk}"></span>
+                    </p>
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>SKU :</span>
+                        <span th:text="${barang.sku}"></span>
+                    </p>
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Tipe :</span>
+                        <span th:text="${tipe_barang_string}"></span>
+                    </p>
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Total Stok :</span>
+                        <span th:text="${totStok}"></span>
+                    </p>
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Harga :</span>
+                        <span th:text="${barang.harga}"></span>
+                    </p>
+
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 20px;">
+                        <span>Daftar Gudang</span>
+                    </p>
+                  <table class="table table-bordered" th:if="${not #lists.isEmpty(barang.listGudangBarang)}">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama Gudang</th>
+                        <th scope="col">Alamat Gudang</th>
+                        <th scope="col">Stok</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="gudangBarang, listGudangBarangItr: ${barang.listGudangBarang}">
+                            <th scope="row" th:text="${listGudangBarangItr.count}">1</th>
+                            <td th:text="${gudangBarang.gudang.nama}"></td>
+                            <td th:text="${gudangBarang.gudang.alamat_gudang}"></td>
+                            <td th:text="${gudangBarang.stok}"></td>
+                        </tr>
+                    </tbody>
+                  </table>
+
+                  <p th:unless="${not #lists.isEmpty(barang.listGudangBarang)}" style="color: red;">Tidak ada barang di gudang.</p>
+                  <a class= "btn btn-secondary" th:href="@{/barang}" style="display: block; margin: 10 auto;">Kembali</a>
+                </div>
+
+            </div>
+        </div>           
+
+        </div>
+    </div>
+</body>
+
+</html>
