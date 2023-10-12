@@ -33,16 +33,16 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Alamat</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Stok</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="gudang, gudangItr: ${listGudang}">
-                    <th scope="row" th:text="${gudangItr.count}">1</th>
-                    <td th:text="${gudang.nama}"></td>
-                    <td th:text="${gudang.alamat_gudang}"></td>
-                    <td><a class= "btn btn-secondary" th:href="@{/gudang/{id}(id=${gudang.idGudang})}">Detail</a>
+                <tr th:each="gudangBarang, listGudangBarangItr: ${listGudangBarang}">
+                    <th scope="row" th:text="${listGudangBarangItr.count}">1</th>
+                    <td th:text="${gudangBarang.gudang.nama}"></td>
+                    <td th:text="${gudangBarang.gudang.alamat_gudang}"></td>
+                    <td th:text="${gudangBarang.stok}"></td>
                     </td>
                 </tr>
                 </tbody>

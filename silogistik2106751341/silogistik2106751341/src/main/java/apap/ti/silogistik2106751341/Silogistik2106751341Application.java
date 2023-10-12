@@ -46,14 +46,14 @@ public class Silogistik2106751341Application {
 				gudangDTO.setAlamat_gudang(faker.address().fullAddress());
 				var gudang = gudangMapper.createGudangDTOtoGudang(gudangDTO);
 				gudangService.saveGudang(gudang);
-			}
 
-			var karyawanDTO = new CreateKaryawanRequestDTO();
-			karyawanDTO.setNamaKaryawan(faker.name().firstName() + " " + faker.name().lastName());
-			karyawanDTO.setJenisKelamin(faker.number().numberBetween(1, 3));
-			karyawanDTO.setTanggalLahir(faker.date().birthday());
-			var karyawan = karyawanMapper.createKaryawanDTOtoKaryawan(karyawanDTO);
-			karyawanService.saveKaryawan(karyawan);
+				var karyawanDTO = new CreateKaryawanRequestDTO();
+				karyawanDTO.setNamaKaryawan(faker.name().firstName() + " " + faker.name().lastName());
+				karyawanDTO.setJenisKelamin(faker.number().numberBetween(1, 3));
+				karyawanDTO.setTanggalLahir(faker.date().birthday());
+				var karyawan = karyawanMapper.createKaryawanDTOtoKaryawan(karyawanDTO);
+				karyawanService.saveKaryawan(karyawan);
+			}
 
 		};
 	}

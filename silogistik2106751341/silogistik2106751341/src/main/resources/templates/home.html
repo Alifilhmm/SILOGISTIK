@@ -16,40 +16,43 @@
       <h1>
         SILOGISTIK
       </h1>
-      <br>
-      <br>
+      <br><br>
+      <br><br>
       <div class="row">
         <div class="col-md-3">
+          <a th:href="@{/gudang}">
           <div class="card bg-primary">
             <div class="card-body text-white">
-              <h5 class="card-title">Gudang</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title" style="font-size: 30px;">Gudang</h5>
+              <p class="card-text" th:text="${totGudang}" style="font-size: 50px;">0</p>
             </div>
-          </div>
+          </div></a>
+        </div>
+        <div class="col-md-3">
+          <a th:href="@{/barang}">
+          <div class="card bg-primary">
+            <div class="card-body text-white">
+              <h5 class="card-title" style="font-size: 30px;">Barang</h5>
+              <p class="card-text" th:text="${totBarang}" style="font-size: 50px;">0</p>
+            </div>
+          </div></a>
         </div>
         <div class="col-md-3">
           <div class="card bg-primary">
             <div class="card-body text-white">
-              <h5 class="card-title">Barang</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title" style="font-size: 30px;">Karyawan</h5>
+              <p class="card-text" th:text="${totKaryawan}" style="font-size: 50px;">0</p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
+          <a th:href="@{/permintaan-pengiriman}">
           <div class="card bg-primary">
             <div class="card-body text-white">
-              <h5 class="card-title">Permintaan Pengiriman</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title" style="font-size: 20px;">Permintaan Pengiriman</h5>
+              <p class="card-text" th:text="${totPengiriman}" style="font-size: 50px;">0</p>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card bg-primary">
-            <div class="card-body text-white">
-              <h5 class="card-title">Karyawan</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
+          </div></a>
         </div>
     </div>
     </div>

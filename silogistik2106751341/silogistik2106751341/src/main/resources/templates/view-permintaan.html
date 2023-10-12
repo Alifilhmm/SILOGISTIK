@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  <title>Detail Permintaan Pengiriman</title>
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar(request)}"></nav>
+    <div class="container mt-5">
+        <div class="container text-left">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 style="font-size: 24px; font-weight: bold;">Detail Permintaan Pengiriman</h1>
+                    <a th:href="@{/permintaan-pengiriman/{idPermintaanPengiriman}/cancel(idPermintaanPengiriman=${pengiriman.idPengiriman})}" class="btn btn-danger float-end">Cancel Permintaan Pengiriman</a>
+                </div>
+                <div class="card-body">
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>No Permintaan Pengiriman :</span>
+                        <span th:text="${pengiriman.nomor_pengiriman}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Waktu Permintaan :</span>
+                        <span th:text="${pengiriman.waktu_permintaan}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Karyawan Bertugas :</span>
+                        <span th:text="${pengiriman.karyawan.namaKaryawan}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Waktu Pengiriman :</span>
+                        <span th:text="${pengiriman.tanggal_pengiriman}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Nama Penerima :</span>
+                        <span th:text="${pengiriman.nama_penerima}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Alamat Penerima :</span>
+                        <span th:text="${pengiriman.alamat_penerima}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Jenis Latanan :</span>
+                        <span th:text="${jenisLayananString}"></span>
+                    </p>
+                    <p class="text-left" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        <span>Biaya Pengiriman : Rp</span>
+                        <span th:text="${pengiriman.biaya_pengiriman}"></span>
+                    </p>
+
+                    <p class="text-left" style="font-weight: bold; font-family: 'Arial', sans-serif; font-size: 20px;">
+                        <span>Daftar Barang Dipesan</span>
+                    </p>
+                  <table class="table table-bordered">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Merk</th>
+                        <th scope="col">Kuantitas Pesanan</th>
+                        <th scope="col">Total Harga</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pengirimanBarang, listPengirimanBarangItr: ${listPengirimanBarang}">
+                            <th scope="row" th:text="${listPengirimanBarangItr.count}">1</th>
+                            <td th:text="${pengirimanBarang.barang.merk}"></td>
+                            <td th:text="${pengirimanBarang.kuantitas}"></td>
+                            <td th:text="${pengirimanBarang.totHarga}"></td>
+                        </tr>
+                    </tbody>
+                  </table>
+
+                  <a class= "btn btn-secondary" th:href="@{/permintaan-pengiriman}" style="display: block; margin: 10 auto;">Kembali</a>
+                </div>
+
+            </div>
+        </div>           
+
+        </div>
+    </div>
+</body>
+
+</html>

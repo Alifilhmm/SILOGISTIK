@@ -20,6 +20,8 @@ import apap.ti.silogistik2106751341.model.GudangBarang;
 import apap.ti.silogistik2106751341.service.BarangService;
 import apap.ti.silogistik2106751341.service.GudangBarangService;
 import apap.ti.silogistik2106751341.service.GudangService;
+import apap.ti.silogistik2106751341.service.KaryawanService;
+import apap.ti.silogistik2106751341.service.PengirimanService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +47,26 @@ public class GudangController {
     @Autowired
     private GudangBarangMapper gudangBarangMapper;
 
-    @Autowired GudangBarangService gudangBarangService;
+    @Autowired 
+    private GudangBarangService gudangBarangService;
+
+    @Autowired
+    private KaryawanService karyawanService;
+
+    @Autowired
+    private PengirimanService pengirimanService;
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        var totBarang = barangService.getAllBarang().size();
+        var totGudang = gudangService.getAllGudang().size();
+        var totKaryawan = karyawanService.getAllKaryawan().size();
+        var totPengiriman = pengirimanService.counterPermintaan();
+
+        model.addAttribute("totBarang", totBarang);
+        model.addAttribute("totGudang", totGudang);
+        model.addAttribute("totKaryawan", totKaryawan);
+        model.addAttribute("totPengiriman", totPengiriman);
         return "home";
     }
 
@@ -103,7 +121,7 @@ public class GudangController {
         model.addAttribute("listBarangExisting", barangService.getAllBarang());
 
         model.addAttribute("gudangDTO", updateGudangRequestDTO);
-        System.out.println(updateGudangRequestDTO.getNama());
+        //System.out.println(updateGudangRequestDTO.getNama());
 
         return "restock-barang";
     }
@@ -137,17 +155,17 @@ public class GudangController {
     public String searchBarang(@RequestParam(value="sku", required = true) String sku, Model model) {
         var barang = barangService.getBarangById(sku);
         var listGudangBarang = barang.getListGudangBarang();
-        List<Gudang> insideGudang = new ArrayList<Gudang>();
+        // List<Gudang> insideGudang = new ArrayList<Gudang>();
 
-        for (GudangBarang gb : listGudangBarang) {
-            insideGudang.add(gb.getGudang());
-        }
+        // for (GudangBarang gb : listGudangBarang) {
+        //     insideGudang.add(gb.getGudang());
+        // }
 
         var listBarang = barangService.getAllBarang();
         var sortedListBarang = barangService.sortedListBarang(listBarang);
         
-        model.addAttribute("listBarang", sortedListBarang);
-        model.addAttribute("listGudang", insideGudang);
+        model.addAttribute("listBarang", sortedListBarang);;
+        model.addAttribute("listGudangBarang", listGudangBarang);
 
         return "search-barang";
     }

@@ -35,5 +35,8 @@ public class Karyawan {
     @NotNull
     @Column(name = "tanggal_lahir", nullable = false)
     private Date tanggalLahir;
+
+    @OneToMany(mappedBy = "karyawan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Pengiriman> listPengiriman;
     
 }

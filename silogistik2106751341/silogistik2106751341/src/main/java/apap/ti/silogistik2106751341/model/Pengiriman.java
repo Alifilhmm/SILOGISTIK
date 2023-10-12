@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,15 +24,12 @@ public class Pengiriman {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long idPengiriman;
 
-    @NotNull
-    @Size(max = 12)
+    @Size(max = 16)
     @Column(name = "nomor_pengiriman", nullable = false)
     private String nomor_pengiriman;
 
-    @NotNull
     @Column(name = "is_cancelled", nullable = false)
     private boolean is_cancelled = false;
 
@@ -44,7 +43,7 @@ public class Pengiriman {
 
     @NotNull
     @Column(name = "tanggal_pengiriman", nullable = false)
-    private Date tanggal_pengiriman;
+    private String tanggal_pengiriman;
 
     @NotNull
     @Column(name = "biaya_pengiriman", nullable = false)
@@ -54,9 +53,15 @@ public class Pengiriman {
     @Column(name = "jenis_layanan", nullable = false)
     private Integer jenis_layanan;
 
-    @NotNull
     @Column(name = "waktu_permintaan", nullable = false)
-    private Date waktu_permintaan;
+    private LocalDateTime waktu_permintaan;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "karyawan_id", referencedColumnName = "idKaryawan") 
+    private Karyawan karyawan;
+
+    @OneToMany(mappedBy = "pengiriman",  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<PengirimanBarang> listPengirimanBarang;
 
 
 
