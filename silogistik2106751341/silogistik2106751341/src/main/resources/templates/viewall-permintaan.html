@@ -26,19 +26,23 @@
                     <th scope="col">Nama Penerima</th>
                     <th scope="col">Alamat Penerima</th>
                     <th scope="col">Tanggal Pengiriman</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
 
             <tbody>
             <tr th:each="pengiriman, pengirimanItr: ${listPengiriman}">
-                <div th:if="${not pengiriman.is_cancelled}">
                 <th scope="row" th:text="${pengirimanItr.count}">1</th>
                 <td th:text="${pengiriman.waktu_permintaan}"></td>
                 <td th:text="${pengiriman.nomor_pengiriman}"></td>
                 <td th:text="${pengiriman.nama_penerima}"></td>
                 <td th:text="${pengiriman.alamat_penerima}"></td>
                 <td th:text="${pengiriman.tanggal_pengiriman}"></td>
+                <td th:switch="${pengiriman.is_cancelled}">
+                    <p th:case="true">Cancelled</p>
+                    <p th:case="false">In Progress</p>
+                </td>
                 <td><a class= "btn btn-secondary" th:href="@{/permintaan-pengiriman/{idPermintaanPengiriman}(idPermintaanPengiriman=${pengiriman.idPengiriman})}">Detail</a>
                 </td></div>
             </tr>

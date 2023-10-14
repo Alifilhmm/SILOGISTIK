@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,15 @@ public class PengirimanController {
     public String viewallPengiriman(Model model) {
         List<Pengiriman> listPengiriman = pengirimanService.getAllPengiriman();
 
-        model.addAttribute("listPengiriman", listPengiriman);
+        List<Pengiriman> listPengirimanSorted = new ArrayList<Pengiriman>();
+
+        for(Pengiriman p: listPengiriman) {
+            listPengirimanSorted.add(p);
+        }
+
+        Collections.sort(listPengirimanSorted, Comparator.comparing(Pengiriman::getWaktu_permintaan).reversed());
+
+        model.addAttribute("listPengiriman", listPengirimanSorted);
 
         return "viewall-permintaan";
     }

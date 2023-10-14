@@ -61,7 +61,7 @@ public class GudangController {
         var totBarang = barangService.getAllBarang().size();
         var totGudang = gudangService.getAllGudang().size();
         var totKaryawan = karyawanService.getAllKaryawan().size();
-        var totPengiriman = pengirimanService.counterPermintaan();
+        var totPengiriman = pengirimanService.getAllPengiriman().size();
 
         model.addAttribute("totBarang", totBarang);
         model.addAttribute("totGudang", totGudang);
